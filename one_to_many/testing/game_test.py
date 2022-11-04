@@ -7,7 +7,7 @@ class TestGame:
     '''Class Game in db.py'''
 
     # start session, reset db
-    engine = create_engine('sqlite:///one_to_many/one_to_many.db')
+    engine = create_engine('sqlite:///one_to_many.db')
     Session = sessionmaker(bind=engine)
     session = Session()
 
@@ -23,14 +23,14 @@ class TestGame:
     session.commit()
 
     mk_review_1 = Review(
-        review_score=10,
-        review_comment="Wow, what a game",
+        score=10,
+        comment="Wow, what a game",
         game_id=mario_kart.id
     )
 
     mk_review_2 = Review(
-        review_score=8,
-        review_comment="A classic",
+        score=8,
+        comment="A classic",
         game_id=mario_kart.id
     )
 
@@ -55,8 +55,8 @@ class TestGame:
         '''has two reviews with scores 10 and 8.'''
         assert(
             len(TestGame.mario_kart.reviews) == 2 and
-            TestGame.mario_kart.reviews[0].review_score == 10 and
-            TestGame.mario_kart.reviews[1].review_score == 8
+            TestGame.mario_kart.reviews[0].score == 10 and
+            TestGame.mario_kart.reviews[1].score == 8
         )
 
     def test_can_add_new_review(self):
